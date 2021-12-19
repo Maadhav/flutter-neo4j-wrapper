@@ -14,6 +14,6 @@ class MatchClause {
     return ReturnClause.createQuery(node, _query);
   }
 
-  WhereClause where(String node, Comparison operator, [String? value]) =>
+  WhereClause where(String node, Comparison operator, [Object? value]) =>
       WhereClause.createQuery(node, operator, _query, value);
 }

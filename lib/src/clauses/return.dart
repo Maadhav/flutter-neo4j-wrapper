@@ -1,3 +1,5 @@
+import 'package:neo4j/src/clauses/orderby.dart';
+import 'package:neo4j/src/clauses/skip.dart';
 import 'package:neo4j/src/execute_query.dart';
 import 'package:neo4j/src/query_builder.dart';
 
@@ -12,6 +14,14 @@ class ReturnClause {
 
   Future<dynamic> execute() async {
     return await Execute.call(_query);
+  }
+
+  OrderByClause orderBy(String node, [bool descending = false]) {
+    return OrderByClause.createQuery(node, _query, descending);
+  }
+
+  SkipClause skip(int skip) {
+    return SkipClause.createQuery(skip.toString(), _query);
   }
 
   LimitClause limit(int limit) {

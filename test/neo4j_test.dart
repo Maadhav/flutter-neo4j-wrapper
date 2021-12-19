@@ -12,11 +12,10 @@ void main() {
   });
   test('query builder', () async {
     await neo4j.query
-        .match("n:ETag")
-        .where("ID(n)", Comparison.equality, "21204")
-        .and("n.name", Comparison.contains, "Test")
+        .match("n:ELetter")
+        .where("n.day", Comparison.iN, ['25', '23',])
         .retrn("n")
-        .limit(1)
+        .limit(5)
         .execute()
         .then((value) => print(value));
   });

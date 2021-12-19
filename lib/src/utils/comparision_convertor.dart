@@ -4,6 +4,9 @@ String convertCompare(String node, Comparison operator, Object? value) {
   if (value is String) {
     if (int.tryParse(value) == null && !value.contains(".")) value = '"$value"';
   }
+  if (value is List) {
+    value = value.map((v) => v is String ? '"$v"' : v).toList();
+  }
   switch (operator) {
     case Comparison.lessThan:
       return " $node < $value";
