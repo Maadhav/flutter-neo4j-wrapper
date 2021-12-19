@@ -1,11 +1,11 @@
 import 'package:neo4j/src/execute_query.dart';
 import 'package:neo4j/src/query_builder.dart';
 
-class LimitClause {
+class RawQuery {
   late final QueryBuilder _query;
 
-  LimitClause.createQuery(String node, this._query) {
-    _query.addClause("LIMIT $node");
+  RawQuery.createQuery(String data, this._query) {
+    _query.addClause(data);
   }
 
   Future<dynamic> execute([Map<String, dynamic>? params]) async =>
