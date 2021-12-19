@@ -7,7 +7,8 @@ import 'package:retry/retry.dart';
 
 class Execute {
   static final _client = Client();
-  static Future<dynamic> call(QueryBuilder query) async {
+  static Future<dynamic> call(QueryBuilder query,
+      [Map<String, dynamic>? params]) async {
     final neo4j = Neo4jClient.instance;
     final headers = {
       'uid': neo4j.app.uid,
@@ -21,6 +22,7 @@ class Execute {
             'statements': [
               {
                 'statement': query.toString(),
+                if (params != null) 'parameters': params,
               }
             ]
           }),

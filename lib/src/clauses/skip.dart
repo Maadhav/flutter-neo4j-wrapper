@@ -13,7 +13,7 @@ class SkipClause {
     return LimitClause.createQuery(limit.toString(), _query);
   }
 
-  Future<dynamic> execute() async {
-    return await Execute.call(_query);
+  Future<dynamic> execute([Map<String, dynamic>? params]) async {
+    return await Execute.call(_query, params);
   }
 }

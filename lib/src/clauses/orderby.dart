@@ -15,7 +15,7 @@ class OrderByClause {
     }
   }
 
-  OrderByClause orderBy(String node, [bool descending = false]) =>
+  OrderByClause orderBy(String node, {bool descending = false}) =>
       OrderByClause.createQuery(node, _query, descending, true);
 
   LimitClause limit(int limit) {
@@ -26,7 +26,7 @@ class OrderByClause {
     return SkipClause.createQuery(skip.toString(), _query);
   }
 
-  Future<dynamic> execute() async {
-    return await Execute.call(_query);
+  Future<dynamic> execute([Map<String, dynamic>? params]) async {
+    return await Execute.call(_query, params);
   }
 }

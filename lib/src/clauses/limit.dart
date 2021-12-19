@@ -8,7 +8,7 @@ class LimitClause {
     _query.addClause("LIMIT $node");
   }
 
-  Future<dynamic> execute() async {
-    return await Execute.call(_query);
+  Future<dynamic> execute([Map<String, dynamic>? params]) async {
+    return await Execute.call(_query, params);
   }
 }
