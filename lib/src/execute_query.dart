@@ -14,7 +14,7 @@ class Execute {
       'Accept': 'application/json;charset=UTF-8',
       'Content-Type': 'application/json',
     };
-
+    print(query);
     var response = await retry<Response>(
       () => _client.post(neo4j.app.uri,
           body: jsonEncode({

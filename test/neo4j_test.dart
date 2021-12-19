@@ -13,6 +13,8 @@ void main() {
   test('query builder', () async {
     await neo4j.query
         .match("n:ETag")
+        .where("ID(n)", Comparison.equality, "21204")
+        .and("n.name", Comparison.contains, "Test")
         .retrn("n")
         .limit(1)
         .execute()

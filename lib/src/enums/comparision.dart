@@ -1,0 +1,15 @@
+enum Comparison {
+  lessThan,
+  lessThanEqualTo,
+  inequality,
+  equality,
+  greaterThan,
+  greaterThanEqualTo,
+  contains,
+  endsWith,
+  iN,
+  isNotNull,
+  isNull,
+  not,
+  startsWith,
+}

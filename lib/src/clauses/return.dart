@@ -3,18 +3,18 @@ import 'package:neo4j/src/query_builder.dart';
 
 import 'limit.dart';
 
-class RETURN {
+class ReturnClause {
   late final QueryBuilder _query;
 
-  RETURN.createQuery(String node, this._query) {
-    _query.insert("RETURN $node");
+  ReturnClause.createQuery(String node, this._query) {
+    _query.addClause("RETURN $node");
   }
 
   Future<dynamic> execute() async {
     return await Execute.call(_query);
   }
 
-  LIMIT limit(int limit) {
-    return LIMIT.createQuery(limit.toString(), _query);
+  LimitClause limit(int limit) {
+    return LimitClause.createQuery(limit.toString(), _query);
   }
 }

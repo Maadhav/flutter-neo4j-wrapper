@@ -1,9 +1,9 @@
 import 'package:neo4j/src/query_builder.dart';
 
-class CREATE {
+class CreateClause {
   late final QueryBuilder _query;
 
-  CREATE.createQuery(String node, this._query) {
-    _query.insert("CREATE ($node)");
+  CreateClause.createQuery(String node, this._query) {
+    _query.addClause("CREATE ($node)");
   }
 }

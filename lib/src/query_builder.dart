@@ -1,7 +1,7 @@
 class QueryBuilder extends StringBuffer {
   QueryBuilder([String query = '']);
 
-  void insert([Object object = '']) {
-    writeAll([object, ' ']);
+  void addClause([Object object = '']) {
+    write('$object ');
   }
 }
