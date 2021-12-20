@@ -1,12 +1,10 @@
+import 'dart:convert';
+
 import 'package:neo4j/src/enums/comparision.dart';
 
 String convertCompare(String node, Comparison operator, Object? value) {
-  if (value is String) {
-    if (int.tryParse(value) == null && !value.contains(".")) value = '"$value"';
-  }
-  if (value is List) {
-    value = value.map((v) => v is String ? '"$v"' : v).toList();
-  }
+  if (!value.toString().contains(".")) value = jsonEncode(value);
+
   switch (operator) {
     case Comparison.lessThan:
       return " $node < $value";
@@ -22,9 +20,11 @@ String convertCompare(String node, Comparison operator, Object? value) {
       return " $node >= $value";
     case Comparison.contains:
       return " $node CONTAINS $value";
+    case Comparison.notContains:
+      return " NOT $node CONTAINS $value";
     case Comparison.endsWith:
       return " $node ENDS WITH $value";
-    case Comparison.iN:
+    case Comparison.in_:
       return " $node IN $value";
     case Comparison.isNotNull:
       return " $node IS NOT NULL";
