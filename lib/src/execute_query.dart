@@ -2,12 +2,13 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:neo4j/src/client.dart';
+import 'package:neo4j/src/neo4j_response.dart';
 import 'package:neo4j/src/query_builder.dart';
 import 'package:retry/retry.dart';
 
 class Execute {
   static final _client = Client();
-  static Future<dynamic> call(QueryBuilder query,
+  static Future<Neo4jResponse> call(QueryBuilder query,
       [Map<String, dynamic>? params]) async {
     final neo4j = Neo4jClient.instance;
     final headers = {
@@ -29,6 +30,6 @@ class Execute {
           headers: headers),
       onRetry: neo4j.onRetry,
     );
-    return jsonDecode(response.body);
+    return Neo4jResponse.fromJson(response.body);
   }
 }

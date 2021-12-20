@@ -1,3 +1,4 @@
+import 'package:neo4j/src/neo4j_response.dart';
 import 'package:neo4j/src/query_builder.dart';
 
 import 'enums/comparision.dart';
@@ -24,6 +25,8 @@ class Query {
       Query._append("DETACH DELETE $node", _query);
   Query detach(String node) => Query._append("DETACH $node", _query);
   Query remove(String node) => Query._append("REMOVE $node", _query);
+  Query yield_(String node) => Query._append("YIELD $node", _query);
+  Query with_(String node) => Query._append("WITH $node", _query);
   Query set(String node, [Object? value]) =>
       Query._append("SET $node = ${value ?? 'null'}", _query);
   Query where(String node, Comparison operator, [Object? value]) =>
@@ -39,7 +42,9 @@ class Query {
           .contains("ORDER BY")
       ? Query._append(", $node ${ascending ? 'ASC' : 'DESC'}", _query)
       : Query._append("ORDER BY $node ${ascending ? 'ASC' : 'DESC'}", _query);
-  Future<dynamic> execute([Map<String, dynamic>? params]) async {
+  Query fullTextSearch(String index, String query) =>
+      Query._append('CALL db.index.fulltext.queryNodes("$index", "$query")', _query);
+  Future<Neo4jResponse> execute([Map<String, dynamic>? params]) async {
     return await Execute.call(_query, params);
   }
 }
