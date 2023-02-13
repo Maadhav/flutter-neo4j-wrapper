@@ -13,6 +13,7 @@ class Execute {
     final neo4j = Neo4jClient.instance;
     final headers = {
       'uid': neo4j.app.uid,
+      'Access-Control-Allow-Origin': '*',
       'Accept': 'application/json;charset=UTF-8',
       'Content-Type': 'application/json',
     };
